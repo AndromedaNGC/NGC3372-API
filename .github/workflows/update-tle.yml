@@ -18,13 +18,11 @@ jobs:
 
       - name: Download TLE data
         run: |
-          GROUPS=("stations" "noaa" "visual" "active" "last-30-days")
-          rm -f data/*.txt
-          for GROUP in "${GROUPS[@]}"; do
-            echo "Downloading $GROUP..."
-            curl -s -L -o "data/${GROUP}.txt" "https://celestrak.org/NORAD/elements/gp.php?GROUP=${GROUP}&FORMAT=tle"
-            sleep 1
-          done
+          curl -s -L -o "data/stations.txt" "https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle"
+          curl -s -L -o "data/noaa.txt" "https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle"
+          curl -s -L -o "data/visual.txt" "https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle"
+          curl -s -L -o "data/active.txt" "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle"
+          curl -s -L -o "data/last-30-days.txt" "https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle"
 
       - name: Commit and Push changes
         run: |
